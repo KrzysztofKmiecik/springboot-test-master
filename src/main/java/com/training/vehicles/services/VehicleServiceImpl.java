@@ -34,8 +34,9 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Override
     public List<Vehicle> findAllVehiclesByColor(String color) {
-        Iterable<Vehicle> vehicles = vehicleRepository.findAllByColor(color);
+        Iterable<Vehicle> vehicles = vehicleRepository.findAll();
         return StreamSupport.stream(vehicles.spliterator(), true)
+                .filter(vehicle -> vehicle.getColor().equals(color))
                 .collect(Collectors.toList());
     }
 
